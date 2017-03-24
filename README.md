@@ -5,7 +5,7 @@
 
 > 项目地址：https://github.com/linchaolong/ImagePicker
 
-ImagePicker 是 Android 下的图片的选择与裁剪开源库，基于 [Android-Image-Cropper](https://github.com/ArthurHub/Android-Image-Cropper) 并做了如下改进：
+ImagePicker 是 Android 下的图片选择与裁剪开源库，基于 [Android-Image-Cropper](https://github.com/ArthurHub/Android-Image-Cropper) 并做了如下改进：
 
 - 简单易用的api，调用示例如下
 
@@ -65,7 +65,7 @@ compile 'com.linchaolong.android:imagepicker:1.0'
   }
 ```
 
-# 调用说明
+# 使用说明
 
 ## 1. 调起图片选择器
 
