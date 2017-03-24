@@ -12,9 +12,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import com.facebook.drawee.generic.RoundingParams;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.linchaolong.android.imagepicker.ImagePicker;
+import com.linchaolong.android.imagepicker.cropper.CropImage;
+import com.linchaolong.android.imagepicker.cropper.CropImageView;
 
 /**
  * Created by linchaolong on 2017/3/21.
@@ -22,7 +25,8 @@ import com.linchaolong.android.imagepicker.ImagePicker;
 public class TestFragment extends Fragment {
 
   private ImagePicker imagePicker = new ImagePicker();
-  private SimpleDraweeView draweeView;
+  private ImageView imageView;
+  private CropImageView cropImageView;
 
   @Nullable @Override
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -44,9 +48,9 @@ public class TestFragment extends Fragment {
   }
 
   private void init(View contentView) {
-    imagePicker.setCropImage(false); // 不裁剪图片
-    draweeView = (SimpleDraweeView) contentView.findViewById(R.id.draweeView);
-    draweeView.setOnClickListener(new View.OnClickListener() {
+    imageView = (ImageView) contentView.findViewById(R.id.imageView);
+    cropImageView = (CropImageView) contentView.findViewById(R.id.cropImageView);
+    contentView.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         startCameraOrGallery();
       }
@@ -57,26 +61,27 @@ public class TestFragment extends Fragment {
     new AlertDialog.Builder(getActivity()).setTitle("设置头像")
         .setItems(new String[] { "从相册中选取图片", "拍照" }, new DialogInterface.OnClickListener() {
           @Override public void onClick(DialogInterface dialog, int which) {
+            // 回调
+            ImagePicker.Callback callback = new ImagePicker.Callback() {
+              @Override public void onPickImage(Uri imageUri) {
+              }
+
+              @Override public void onCropImage(Uri imageUri) {
+                imageView.setImageURI(imageUri);
+                cropImageView.setImageUriAsync(imageUri);
+              }
+            };
             if (which == 0) {
-              // 选择图片
-              imagePicker.startGallery(TestFragment.this, new ImagePicker.Callback() {
-                @Override public void onPickImage(Uri imageUri) {
-                  draweeView.setImageURI(imageUri);
-                  draweeView.getHierarchy().setRoundingParams(RoundingParams.asCircle());
-                }
-              });
+              // 从相册中选取图片
+              imagePicker.startGallery(TestFragment.this, callback);
             } else {
               // 拍照
-              imagePicker.startCamera(TestFragment.this, new ImagePicker.Callback() {
-                @Override public void onPickImage(Uri imageUri) {
-                  draweeView.setImageURI(imageUri);
-                  draweeView.getHierarchy().setRoundingParams(RoundingParams.asCircle());
-                }
-              });
+              imagePicker.startCamera(TestFragment.this, callback);
             }
           }
         })
-        .show().getWindow().setGravity(Gravity.BOTTOM);
+        .show()
+        .getWindow()
+        .setGravity(Gravity.BOTTOM);
   }
-
 }
