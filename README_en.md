@@ -23,7 +23,7 @@ public void startChooser(Activity activity, @NonNull Callback callback)
 public void startChooser(Fragment fragment, @NonNull Callback callback)
 ```
 
-- fix some devices Select the image to return FileNotFoundException
+- fix some devices select the image to return FileNotFoundException
 - Runtime permissions check
 - Localization
 
@@ -47,7 +47,6 @@ compile 'com.linchaolong.android:imagepicker:1.0'
 2. call  `onActivityResult` and `onRequestPermissionsResult` method in your Activity/Fragment:
 
 ```
-//
   @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     imagePicker.onActivityResult(activity/fragment, requestCode, resultCode, data);

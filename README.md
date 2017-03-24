@@ -53,7 +53,6 @@ compile 'com.linchaolong.android:imagepicker:1.0'
 2. 在 Activity 或者 Fragment 中回调 `onActivityResult`，`onRequestPermissionsResult` 方法
 
 ```
-//
   @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     imagePicker.onActivityResult(activity/fragment, requestCode, resultCode, data);
