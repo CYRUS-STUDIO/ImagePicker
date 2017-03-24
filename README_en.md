@@ -31,6 +31,12 @@ public void startChooser(Fragment fragment, @NonNull Callback callback)
 
 # Using ImagePicker in your application
 
+add the following line to the dependencies section of your build.gradle file:
+
+```
+compile 'com.linchaolong.android:imagepicker:1.0'
+```
+
 1. add `CropImageActivity` in your Androidmanifest.xml:
 
 ```

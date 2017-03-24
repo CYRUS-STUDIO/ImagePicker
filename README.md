@@ -38,7 +38,12 @@ public void startChooser(Fragment fragment, @NonNull Callback callback)
 
 # 集成说明
 
-1. 在 Androidmanifest.xml 中配置 `CropImageActivity`
+添加依赖到你的 build.gradle
+```
+compile 'com.linchaolong.android:imagepicker:1.0'
+```
+
+1. 在 Androidmanifest.xml 中配置 `CropImageActivity`（裁剪图片需要）
 
 ```
 <activity android:name="com.linchaolong.android.imagepicker.cropper.CropImageActivity"
