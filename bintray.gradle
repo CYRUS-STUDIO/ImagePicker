@@ -1,0 +1,154 @@
+// add to project-level build.gradle
+//buildscript {
+//  dependencies {
+//    classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+//    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+//  }
+//}
+
+// load properties
+Properties properties = new Properties()
+File projectPropertiesFile = project.file("project.properties");
+if (projectPropertiesFile.exists()) {
+  properties.load(projectPropertiesFile.newDataInputStream())
+}
+File localPropertiesFile = project.file("local.properties");
+if (localPropertiesFile.exists()) {
+  properties.load(localPropertiesFile.newDataInputStream())
+}
+
+def bintrayUser = project.hasProperty('bintrayUser') ? project.property('bintrayUser') :
+    System.getenv('BINTRAY_USER')
+if (bintrayUser == null) {
+  bintrayUser = properties.getProperty("bintrayUser")
+}
+def bintrayApikey = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') :
+    System.getenv('BINTRAY_API_KEY')
+if (bintrayApikey == null) {
+  bintrayApikey = properties.getProperty("bintrayApiKey")
+}
+
+// GroupId
+def publishGroupId = properties.getProperty("publishGroupId")
+// ArtifactId
+def publishArtifactId = properties.getProperty("publishArtifactId")
+// 版本号
+def publishVersion = properties.getProperty("publishVersion")
+// 项目名称
+def projectName = properties.getProperty("projectName")
+// 项目描述
+def projectDesc = properties.getProperty("projectDesc")
+// 项目地址
+def projectUrl = properties.getProperty("projectUrl")
+// 仓库名称
+def bintrayRepo = properties.getProperty("bintrayRepo")
+// Git仓库地址
+def gitUrl = properties.getProperty("gitUrl")
+// 开发者id
+def developerId = properties.getProperty("developerId")
+// 开发者名称
+def developerName = properties.getProperty("developerName")
+// 开发者邮箱
+def developerEmail = properties.getProperty("developerEmail")
+
+group = publishGroupId
+version = publishVersion
+
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+install {
+  repositories.mavenInstaller {
+    // 生成 pom 文件的相关参数配置
+    pom.project {
+      name projectName
+      description projectDesc
+      url projectUrl
+
+      packaging 'aar'
+      groupId publishGroupId
+      artifactId publishArtifactId
+      version publishVersion
+
+      // 开源协议
+      licenses {
+        license {
+          name 'The Apache Software License, Version 2.0'
+          url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+          distribution 'repo'
+        }
+      }
+      // Url
+      scm {
+        // Git仓库地址
+        connection gitUrl
+        // 项目主页
+        url projectUrl
+      }
+      // 开发者信息
+      developers {
+        developer {
+          id developerId
+          name developerName
+          email developerEmail
+        }
+      }
+    }
+  }
+}
+
+afterEvaluate { project ->
+  task androidJavadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    exclude '**/pom.xml'
+    exclude '**/proguard_annotations.pro'
+    classpath += files(android.bootClasspath)
+  }
+
+  task androidJavadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from androidJavadoc.destinationDir
+  }
+
+  task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+  }
+
+  android.libraryVariants.all { variant ->
+    def name = variant.name.capitalize()
+    task "jar${name}"(type: Jar, dependsOn: variant.javaCompile) {
+      from variant.javaCompile.destinationDir
+    }
+  }
+
+  artifacts.add('archives', androidJavadocJar)
+  artifacts.add('archives', androidSourcesJar)
+}
+
+bintray {
+  user = bintrayUser
+  key = bintrayApikey
+  configurations = ['archives']
+  pkg {
+    // 你仓库的名称
+    repo = bintrayRepo
+    // 项目名称
+    name = projectName
+    // 用户名
+    userOrg = user
+    // 开源协议
+    licenses = ['Apache-2.0']
+    // 项目主页
+    vcsUrl = projectUrl
+    // 标签
+    //labels = ['gear', 'gore', 'gorilla']
+    // 是否是公开项目
+    publish = true
+  }
+}
+
+// Build and Upload
+// gradlew build bintrayUpload -PbintrayUser=<my user> -PbintrayApiKey=<my key>
+// gradlew build bintrayUpload --info
+
