@@ -98,7 +98,7 @@ imagePicker.startChooser(this, new ImagePicker.Callback() {
         // 圆形/矩形
         .setCropShape(CropImageView.CropShape.RECTANGLE)
         // 调整裁剪后的图片最终大小
-        .setRequestedSize(640, 640)
+        .setRequestedSize(960, 540)
         // 宽高比
         .setAspectRatio(16, 9);
   }
