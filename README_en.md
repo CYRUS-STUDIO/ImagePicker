@@ -80,7 +80,7 @@ imagePicker.startChooser(this, new ImagePicker.Callback() {
         .setMultiTouchEnabled(false)
         .setGuidelines(CropImageView.Guidelines.OFF)
         .setCropShape(CropImageView.CropShape.RECTANGLE)
-        .setRequestedSize(640, 640)
+        .setRequestedSize(960, 540)
         .setAspectRatio(16, 9);
   }
 
@@ -129,7 +129,7 @@ imagePicker.startCamera(activity/fragment, callback);
       // default config
       builder.setMultiTouchEnabled(false)
           .setCropShape(CropImageView.CropShape.OVAL)
-          .setRequestedSize(960, 540)
+          .setRequestedSize(640, 640)
           .setAspectRatio(5, 5);
     }
 
