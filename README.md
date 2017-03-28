@@ -38,9 +38,11 @@ public void startChooser(Fragment fragment, @NonNull Callback callback)
 
 # 集成说明
 
+`${latest.version}` 是 [![Download](https://api.bintray.com/packages/linchaolong/maven/imagepicker/images/download.svg) ](https://bintray.com/linchaolong/maven/imagepicker/_latestVersion)
+
 添加依赖到你的 build.gradle
 ```
-compile 'com.linchaolong.android:imagepicker:1.0'
+compile 'com.linchaolong.android:imagepicker:${latest.version}'
 ```
 
 1. 在 Androidmanifest.xml 中配置 `CropImageActivity`（裁剪图片需要）

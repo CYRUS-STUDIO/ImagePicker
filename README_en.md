@@ -31,10 +31,12 @@ public void startChooser(Fragment fragment, @NonNull Callback callback)
 
 # Using ImagePicker in your application
 
+`${latest.version}` is [![Download](https://api.bintray.com/packages/linchaolong/maven/imagepicker/images/download.svg) ](https://bintray.com/linchaolong/maven/imagepicker/_latestVersion)
+
 add the following line to the dependencies section of your build.gradle file:
 
 ```
-compile 'com.linchaolong.android:imagepicker:1.0'
+compile 'com.linchaolong.android:imagepicker:${latest.version}'
 ```
 
 1. add `CropImageActivity` in your Androidmanifest.xml:

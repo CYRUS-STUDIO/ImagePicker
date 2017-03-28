@@ -344,11 +344,11 @@ public class ImagePicker {
    */
   private void handlePickImageInner(Activity activity, Fragment fragment, Uri imageUri) {
     if(callback != null){
-      Context context = null;
+      Context context;
       if (activity != null) {
         context = activity;
       }else{
-        fragment.getContext();
+        context = fragment.getContext();
       }
       callback.onPickImage(handleUri(context, imageUri));
     }
