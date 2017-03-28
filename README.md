@@ -38,7 +38,7 @@ public void startChooser(Fragment fragment, @NonNull Callback callback)
 
 # 集成说明
 
-`${latest.version}` 是 [![Download](https://api.bintray.com/packages/linchaolong/maven/imagepicker/images/download.svg) ](https://bintray.com/linchaolong/maven/imagepicker/_latestVersion)
+`${latest.version}` 是 [![Download](https://api.bintray.com/packages/linchaolong/maven/imagepicker/images/download.svg)](https://bintray.com/linchaolong/maven/imagepicker/_latestVersion)
 
 添加依赖到你的 build.gradle
 ```
