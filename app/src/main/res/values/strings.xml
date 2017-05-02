@@ -1,3 +1,10 @@
 <resources>
+
   <string name="app_name">ImagePicker</string>
+
+  <!-- custom crop button text-->
+  <!--
+  <string name="crop_image_menu_crop">caijian</string>
+  -->
+
 </resources>
