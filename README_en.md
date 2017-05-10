@@ -25,6 +25,7 @@ public void startChooser(Fragment fragment, @NonNull Callback callback)
 
 - fix some devices select the image to return FileNotFoundException
 - Runtime permissions check
+- Support android N+
 - Localization
 
 ![image](doc/demo.gif)

@@ -30,6 +30,7 @@ public void startChooser(Fragment fragment, @NonNull Callback callback)
 
 - 部分机型选择图片返回 uri 为 content 协议，内部做了检测并自动转换为真实路径，防止 FileNotFoundException
 - 内部做了运行时权限检查，调用者无需考虑权限检查问题
+- 兼容 Android N+
 - strings.xml 国际化
 
 效果图：
