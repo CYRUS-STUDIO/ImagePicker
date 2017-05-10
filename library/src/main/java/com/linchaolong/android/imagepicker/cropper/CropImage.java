@@ -36,7 +36,9 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import com.linchaolong.android.imagepicker.R;
+import com.linchaolong.android.imagepicker.Utils;
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -213,7 +215,7 @@ public final class CropImage {
         if (outputFileUri == null) {
             outputFileUri = getCaptureImageOutputUri(context);
         }
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Utils.getIntentUri(context, outputFileUri));
         return intent;
     }
 
@@ -235,7 +237,7 @@ public final class CropImage {
             intent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
             intent.setPackage(res.activityInfo.packageName);
             if (outputFileUri != null) {
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, Utils.getIntentUri(context, outputFileUri));
             }
             allIntents.add(intent);
         }

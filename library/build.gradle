@@ -42,7 +42,7 @@ publish {
   //compile 'groupId:artifactId:publishVersion'
   groupId = 'com.linchaolong.android'
   artifactId = 'imagepicker'
-  publishVersion = '1.1'
+  publishVersion = '1.2'
   // 项目描述
   desc = 'android image picker and cropper library'
   // 项目地址
