@@ -8,4 +8,8 @@
     <string name="crop_image_menu_crop">Cortar</string>
     <string name="pick_image_intent_chooser_title">Selecione uma opção</string>
 
+    <string name="saving_image">Salvando imagem ...</string>
+
+
+
 </resources>
