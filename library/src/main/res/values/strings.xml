@@ -8,4 +8,8 @@
   <string name="crop_image_menu_crop">裁剪</string>
   <string name="pick_image_intent_chooser_title">选择图片</string>
 
+  <string name="saving_image">画像を保存しています...</string><!-- By Paulo Linhares -->
+
+
+
 </resources>

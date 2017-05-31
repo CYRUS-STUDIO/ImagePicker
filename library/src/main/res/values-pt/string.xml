@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- CropView Translated by Paulo Linhares / plinhares9@gmail.com / Brasil  -->
+    <string name="crop_image_activity_title">Editar</string>
+    <string name="crop_image_menu_rotate_left">Girar para esquerda</string>
+    <string name="crop_image_menu_rotate_right">Girar</string>
+    <string name="crop_image_menu_crop">Cortar</string>
+    <string name="pick_image_intent_chooser_title">Selecione uma opção</string>
+
+    <string name="saving_image">Salvando imagem ...</string>
+
+
+
+</resources>
