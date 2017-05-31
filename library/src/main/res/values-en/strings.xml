@@ -7,7 +7,6 @@
   <string name="crop_image_menu_rotate_right">Rotate</string>
   <string name="crop_image_menu_crop">Crop</string>
   <string name="pick_image_intent_chooser_title">Select source</string>
-
   <string name="saving_image">Saving image ...</string><!-- By Paulo Linhares -->
 
 </resources>

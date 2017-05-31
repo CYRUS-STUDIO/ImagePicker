@@ -169,7 +169,6 @@ public class CropImageActivity extends AppCompatActivity
     @Override
     @SuppressLint("NewApi")
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Toast.makeText(this, getResources().getString(R.string.saving_image), Toast.LENGTH_SHORT).show();//Added by Paulo Linhares. For response to the user during the delay in opening Crop Activitygit stat
 
         // handle result of pick image chooser
         if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE) {
