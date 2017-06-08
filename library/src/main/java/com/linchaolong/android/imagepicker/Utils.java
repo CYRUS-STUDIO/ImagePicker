@@ -28,7 +28,7 @@ public class Utils {
   }
 
   public static Uri getContentUri(Context context, Uri fileUri){
-    return FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", new File(fileUri.getPath()));
+    return FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".imagePicker.provider", new File(fileUri.getPath()));
   }
 
 }
