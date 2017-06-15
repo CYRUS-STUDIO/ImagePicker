@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="crop_image_menu_rotate_left">หมุนรูปกลับ</string>
+    <string name="crop_image_menu_crop">ครอป</string>
+    <string name="crop_image_menu_rotate_right">หมุนรูป</string>
+    <string name="pick_image_intent_chooser_title">กรุณาเลือก</string>
+    <string name="saving_image">กำลังบันทึกรูป ...</string>
+</resources>
