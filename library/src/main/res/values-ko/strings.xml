@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <!-- Korean Translation by Pól Ó Riain / pol.oriain@gmail.com  -->
+  <string name="crop_image_activity_title"></string>
+  <string name="crop_image_menu_rotate_left">반시계방향으로 회전</string>
+  <string name="crop_image_menu_rotate_right">회전</string>
+  <string name="crop_image_menu_crop">잘라내기</string>
+  <string name="pick_image_intent_chooser_title">소스 선택</string>
+  <string name="saving_image">이미지 저장 ...</string>
+
+</resources>
