@@ -2,7 +2,7 @@
 <resources>
 
   <!-- CropView -->
-  <string name="crop_image_activity_title"></string>
+  <string name="crop_image_activity_title">Crop Image</string>
   <string name="crop_image_menu_rotate_left">Rotate counter clockwise</string>
   <string name="crop_image_menu_rotate_right">Rotate</string>
   <string name="crop_image_menu_crop">Crop</string>
