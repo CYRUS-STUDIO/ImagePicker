@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     imagePicker.setCropImage(true);
 
     findViewById(R.id.fragmentTest).setOnClickListener(this);
-    draweeView = (SimpleDraweeView) findViewById(R.id.draweeView);
+    draweeView = findViewById(R.id.draweeView);
     draweeView.setOnClickListener(this);
   }
 
