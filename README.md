@@ -167,4 +167,4 @@ imagePicker.startCamera(activity/fragment, callback);
   }
 ```
 
-> 更多细节请参考项目中的 app 模块的示例代码
+> 更多细节请参考项目中的 app 模块的示例代码 

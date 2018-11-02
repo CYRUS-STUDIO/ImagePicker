@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation" >
+<resources>
 
   <!-- CropView -->
   <string name="crop_image_activity_title"></string>
-  <string name="crop_image_menu_rotate_left">反时针旋转</string>
-  <string name="crop_image_menu_rotate_right">旋转</string>
-  <string name="crop_image_menu_crop">裁剪</string>
-  <string name="pick_image_intent_chooser_title">选择图片</string>
-  <string name="saving_image">截图保存中...</string>
+  <string name="crop_image_menu_rotate_left">Rotate counter clockwise</string>
+  <string name="crop_image_menu_rotate_right">Rotate</string>
+  <string name="crop_image_menu_crop">Crop</string>
+  <string name="pick_image_intent_chooser_title">Select source</string>
+  <string name="saving_image">Saving image ...</string><!-- By Paulo Linhares -->
 
 </resources>
