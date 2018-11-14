@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="crop_image_activity_title">Editar</string>
+    <string name="crop_image_menu_crop">Cortar</string>
+    <string name="crop_image_menu_rotate_left">Girar para izquierda</string>
+    <string name="crop_image_menu_rotate_right">Girar</string>
+    <string name="pick_image_intent_chooser_title">Seleccione una opción</string>
+    <string name="saving_image">Guardando imagen...</string>
+</resources>
