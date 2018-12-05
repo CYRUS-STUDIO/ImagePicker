@@ -50,7 +50,7 @@ compile 'com.linchaolong.android:imagepicker:${latest.version}'
 2. call  `onActivityResult` and `onRequestPermissionsResult` method in your Activity/Fragment:
 
 ```
-  @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+  @Override protected/public void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     imagePicker.onActivityResult(activity/fragment, requestCode, resultCode, data);
   }
