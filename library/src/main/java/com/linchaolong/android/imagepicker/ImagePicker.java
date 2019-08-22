@@ -359,12 +359,16 @@ public class ImagePicker {
     // 打开裁剪图片界面
     CropImage.ActivityBuilder builder = CropImage.activity(imageUri);
     // 裁剪配置
-    callback.cropConfig(builder);
+    if (callback != null) {
+      callback.cropConfig(builder);
+    }
     // 启动裁剪界面
     if (activity != null) {
       builder.start(activity);
     }else{
-      builder.start(fragment.getActivity(), fragment);
+      if (fragment.getActivity() != null) {
+        builder.start(fragment.getActivity(), fragment);
+      }
     }
   }
 
