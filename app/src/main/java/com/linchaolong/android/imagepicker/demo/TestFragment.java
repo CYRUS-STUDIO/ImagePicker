@@ -57,7 +57,7 @@ public class TestFragment extends Fragment {
 
   private void startCameraOrGallery() {
     new AlertDialog.Builder(getActivity()).setTitle("设置头像")
-        .setItems(new String[] { "从相册中选取图片", "拍照" }, new DialogInterface.OnClickListener() {
+        .setItems(new String[] { "选择器(Chooser)", "从相册中选取图片(Gallery)", "拍照(Camera)" }, new DialogInterface.OnClickListener() {
           @Override public void onClick(DialogInterface dialog, int which) {
             // 回调
             ImagePicker.Callback callback = new ImagePicker.Callback() {
@@ -70,6 +70,8 @@ public class TestFragment extends Fragment {
               }
             };
             if (which == 0) {
+              imagePicker.startChooser(TestFragment.this, callback);
+            } else if (which == 1) {
               // 从相册中选取图片
               imagePicker.startGallery(TestFragment.this, callback);
             } else {
