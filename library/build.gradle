@@ -1,61 +1,56 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'maven-publish'
 
 android {
-  compileSdkVersion 28
-  buildToolsVersion "28.0.3"
+  compileSdk 33
 
   defaultConfig {
     minSdkVersion 14
-    targetSdkVersion 28
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    targetSdkVersion 33
+    testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
   }
+
   buildTypes {
     release {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
   }
+
+  publishing {
+    singleVariant('release') {
+      withSourcesJar()
+      withJavadocJar()
+    }
+  }
 }
 
-publish {
-  // 读取 local.properties 中配置
-  Properties properties = new Properties()
-  File localPropertiesFile = rootProject.file("local.properties");
-  if (localPropertiesFile.exists()) {
-    properties.load(localPropertiesFile.newDataInputStream())
+afterEvaluate {
+  publishing {
+    publications {
+      release(MavenPublication) {
+        groupId = 'com.linchaolong.android'
+        artifactId = 'imagepicker'
+        version = '1.5.1'
+        from components.release
+        pom {
+          name = 'ImagePicker'
+          // 项目描述
+          description = 'android image picker and cropper library'
+          // 项目地址
+          url = 'https://github.com/linchaolong/ImagePicker'
+        }
+      }
+    }
   }
-  // 用户名
-  bintrayUser = properties.getProperty("bintrayUser")
-  if(bintrayUser == null && project.hasProperty("bintrayUser")){
-    bintrayUser = project.property("bintrayUser")
-  }
-  // apkKey
-  bintrayKey = properties.getProperty("bintrayKey")
-  if(bintrayKey == null && project.hasProperty("bintrayKey")){
-    bintrayKey = project.property("bintrayKey")
-  }
-  // 仓库名称，默认maven
-  repoName = 'maven'
-  // 组织名称
-  userOrg = 'linchaolong'
-  //compile 'groupId:artifactId:publishVersion'
-  groupId = 'com.linchaolong.android'
-  artifactId = 'imagepicker'
-  publishVersion = '1.5'
-  // 项目描述
-  desc = 'android image picker and cropper library'
-  // 项目地址
-  website = 'https://github.com/linchaolong/ImagePicker'
-  // 如果设置为true，它将运行所有内容，但不会将包上传到bintray。如果是false，那么它会正常上传。
-  dryRun = false
 }
+
 
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
-  androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
-    exclude group: 'com.android.support', module: 'support-annotations'
-  })
-  implementation 'com.android.support:appcompat-v7:28.0.0'
-  testImplementation 'junit:junit:4.12'
+  implementation 'androidx.appcompat:appcompat:1.0.0'
+
+  testImplementation "junit:junit:4.13.2"
+  androidTestImplementation "androidx.test.ext:junit:1.1.5"
+  androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
