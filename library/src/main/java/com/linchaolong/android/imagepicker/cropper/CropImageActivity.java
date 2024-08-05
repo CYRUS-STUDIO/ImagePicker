@@ -22,14 +22,17 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import com.linchaolong.android.imagepicker.R;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -38,7 +41,7 @@ import java.io.IOException;
  * Use {@link CropImage#activity(Uri)} to create a builder to start this activity.
  */
 public class CropImageActivity extends AppCompatActivity
-    implements CropImageView.OnSetImageUriCompleteListener, CropImageView.OnCropImageCompleteListener {
+        implements CropImageView.OnSetImageUriCompleteListener, CropImageView.OnCropImageCompleteListener {
 
     /**
      * The crop image view library widget used in the activity
@@ -74,13 +77,13 @@ public class CropImageActivity extends AppCompatActivity
             if (mCropImageUri == null || mCropImageUri.equals(Uri.EMPTY)) {
                 if (CropImage.isExplicitCameraPermissionRequired(this)) {
                     // request permissions and handle the result in onRequestPermissionsResult()
-                    requestPermissions(new String[]{ Manifest.permission.CAMERA}, CropImage.CAMERA_CAPTURE_PERMISSIONS_REQUEST_CODE);
+                    requestPermissions(new String[]{Manifest.permission.CAMERA}, CropImage.CAMERA_CAPTURE_PERMISSIONS_REQUEST_CODE);
                 } else {
-                    CropImage.startPickImageActivity(this);
+                    startActivityForResult(CropImage.getPickImageChooserIntent(this), CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE);
                 }
             } else if (CropImage.isReadExternalStoragePermissionsRequired(this, mCropImageUri)) {
                 // request permissions and handle the result in onRequestPermissionsResult()
-                requestPermissions(new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE}, CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE);
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE);
             } else {
                 // no permissions required or already grunted, can start crop image activity
                 mCropImageView.setImageUriAsync(mCropImageUri);
@@ -172,6 +175,7 @@ public class CropImageActivity extends AppCompatActivity
     @Override
     @SuppressLint("NewApi")
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
         // handle result of pick image chooser
         if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE) {
@@ -186,7 +190,7 @@ public class CropImageActivity extends AppCompatActivity
                 // For API >= 23 we need to check specifically that we have permissions to read external storage.
                 if (CropImage.isReadExternalStoragePermissionsRequired(this, mCropImageUri)) {
                     // request permissions and handle the result in onRequestPermissionsResult()
-                    requestPermissions(new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE}, CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE);
+                    requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE);
                 } else {
                     // no permissions required or already grunted, can start crop image activity
                     mCropImageView.setImageUriAsync(mCropImageUri);
@@ -197,7 +201,8 @@ public class CropImageActivity extends AppCompatActivity
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull
-        int[] grantResults) {
+    int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE) {
             if (mCropImageUri != null && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // required permissions granted, start crop image activity
@@ -211,7 +216,7 @@ public class CropImageActivity extends AppCompatActivity
         if (requestCode == CropImage.CAMERA_CAPTURE_PERMISSIONS_REQUEST_CODE) {
             //Irrespective of whether camera permission was given or not, we show the picker
             //The picker will not add the camera intent if permission is not available
-            CropImage.startPickImageActivity(this);
+            startActivityForResult(CropImage.getPickImageChooserIntent(this), CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE);
         }
     }
 
