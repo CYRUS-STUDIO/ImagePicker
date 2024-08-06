@@ -183,7 +183,11 @@ public class ImagePicker {
      * 启动图库选择器
      */
     public void startGallery() {
-        galleryLauncher.launch(null);
+        if (PickVisualMedia.isPhotoPickerAvailable(getContext())) {
+            galleryLauncher.launch(null);
+        } else {
+            chooserLauncher.launch(getGalleryIntent(getContext(), false));
+        }
     }
 
 
