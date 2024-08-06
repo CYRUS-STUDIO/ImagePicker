@@ -1,5 +1,9 @@
 package com.linchaolong.android.imagepicker;
 
+import static androidx.activity.result.contract.ActivityResultContracts.PickVisualMedia;
+import static androidx.activity.result.contract.ActivityResultContracts.RequestPermission;
+import static androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
@@ -15,7 +19,7 @@ import android.util.Log;
 import androidx.activity.ComponentActivity;
 import androidx.activity.result.ActivityResultCaller;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.activity.result.PickVisualMediaRequest;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
@@ -43,6 +47,7 @@ public class ImagePicker {
     private CharSequence title;
 
     private Uri imageUrlForRequestPermission;
+    private final ActivityResultLauncher<Void> galleryLauncher;
     private final ActivityResultLauncher<Intent> chooserLauncher;
     private final ActivityResultLauncher<Intent> cropLauncher;
     private final ActivityResultLauncher<Void> requestCameraPermissionForChooser;
@@ -61,7 +66,21 @@ public class ImagePicker {
     public ImagePicker(ActivityResultCaller caller, @NonNull Callback callback) {
         this.caller = caller;
         this.callback = callback;
-        chooserLauncher = caller.registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        galleryLauncher = caller.registerForActivityResult(
+                new WithInputActivityResultContract<>(
+                        new PickVisualMedia(),
+                        new PickVisualMediaRequest.Builder()
+                                .setMediaType(PickVisualMedia.ImageOnly.INSTANCE)
+                                .build()
+                ),
+                imageUri -> {
+                    if (imageUri == null) {
+                        return;
+                    }
+                    handlePickImage(imageUri);
+                }
+        );
+        chooserLauncher = caller.registerForActivityResult(new StartActivityForResult(), result -> {
             if (result.getResultCode() != Activity.RESULT_OK) {
                 return;
             }
@@ -75,7 +94,7 @@ public class ImagePicker {
                 handlePickImage(imageUri);
             }
         });
-        cropLauncher = caller.registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        cropLauncher = caller.registerForActivityResult(new StartActivityForResult(), result -> {
             if (result.getResultCode() != Activity.RESULT_OK) {
                 return;
             }
@@ -86,7 +105,7 @@ public class ImagePicker {
             }
         });
         requestReadPermission = caller.registerForActivityResult(
-                new WithInputActivityResultContract<>(new ActivityResultContracts.RequestPermission(), Manifest.permission.READ_EXTERNAL_STORAGE),
+                new WithInputActivityResultContract<>(new RequestPermission(), Manifest.permission.READ_EXTERNAL_STORAGE),
                 result -> {
                     if (!result) {
                         callback.onPermissionDenied(Manifest.permission.READ_EXTERNAL_STORAGE);
@@ -99,7 +118,7 @@ public class ImagePicker {
                 }
         );
         requestCameraPermissionForChooser = caller.registerForActivityResult(
-                new WithInputActivityResultContract<>(new ActivityResultContracts.RequestPermission(), Manifest.permission.CAMERA),
+                new WithInputActivityResultContract<>(new RequestPermission(), Manifest.permission.CAMERA),
                 result -> {
                     if (!result) {
                         callback.onPermissionDenied(Manifest.permission.CAMERA);
@@ -109,7 +128,7 @@ public class ImagePicker {
                 }
         );
         requestCameraPermissionForCamera = caller.registerForActivityResult(
-                new WithInputActivityResultContract<>(new ActivityResultContracts.RequestPermission(), Manifest.permission.CAMERA),
+                new WithInputActivityResultContract<>(new RequestPermission(), Manifest.permission.CAMERA),
                 result -> {
                     if (!result) {
                         callback.onPermissionDenied(Manifest.permission.CAMERA);
@@ -164,7 +183,7 @@ public class ImagePicker {
      * 启动图库选择器
      */
     public void startGallery() {
-        chooserLauncher.launch(getGalleryIntent(getContext(), false));
+        galleryLauncher.launch(null);
     }
 
 
