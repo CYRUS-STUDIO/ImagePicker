@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.linchaolong.android.imagepicker.demo">
+    xmlns:tools="http://schemas.android.com/tools">
 
   <uses-permission android:name="android.permission.INTERNET" />
+  <!-- 仅用与测试, 项目中不要使用该权限, Google Play不允许 -->
+  <uses-permission
+      android:name="android.permission.QUERY_ALL_PACKAGES"
+      tools:ignore="QueryAllPackagesPermission" />
 
   <application
       android:allowBackup="true"
@@ -10,8 +14,11 @@
       android:label="@string/app_name"
       android:supportsRtl="true"
       android:name=".MyApplication"
-      android:theme="@style/AppTheme">
-    <activity android:name=".MainActivity">
+      android:theme="@style/AppTheme"
+      tools:targetApi="tiramisu">
+    <activity
+      android:name=".MainActivity"
+      android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 

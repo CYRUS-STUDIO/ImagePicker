@@ -1,6 +1,6 @@
 package com.linchaolong.android.imagepicker.demo;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class FragmentTestActivity extends AppCompatActivity {

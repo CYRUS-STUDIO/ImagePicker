@@ -1,14 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.linchaolong.android.imagepicker">
+    xmlns:tools="http://schemas.android.com/tools">
 
   <uses-permission android:name="android.permission.CAMERA"/>
-  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+      android:maxSdkVersion="28"/>
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+      android:maxSdkVersion="32"/>
 
   <application>
 
     <provider
-        android:name="android.support.v4.content.FileProvider"
+        android:name="androidx.core.content.FileProvider"
         android:authorities="${applicationId}.imagePicker.provider"
         android:exported="false"
         android:grantUriPermissions="true">
@@ -17,6 +19,16 @@
           android:resource="@xml/provider_paths"/>
     </provider>
 
+    <!-- Trigger Google Play services to install the backported photo picker module. -->
+    <service android:name="com.google.android.gms.metadata.ModuleDependencies"
+        android:enabled="false"
+        android:exported="false"
+        tools:ignore="MissingClass">
+      <intent-filter>
+        <action android:name="com.google.android.gms.metadata.MODULE_DEPENDENCIES" />
+      </intent-filter>
+      <meta-data android:name="photopicker_activity:0:required" android:value="" />
+    </service>
   </application>
 
 </manifest>

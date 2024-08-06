@@ -690,7 +690,7 @@ public class CropOverlayView extends View {
 
                 canvas.save();
                 canvas.clipPath(mPath, Region.Op.INTERSECT);
-                canvas.clipRect(rect, Region.Op.XOR);
+                canvas.clipRect(rect, Region.Op.DIFFERENCE);
                 canvas.drawRect(left, top, right, bottom, mBackgroundPaint);
                 canvas.restore();
             }
@@ -703,7 +703,7 @@ public class CropOverlayView extends View {
             }
             mPath.addOval(mDrawRect, Path.Direction.CW);
             canvas.save();
-            canvas.clipPath(mPath, Region.Op.XOR);
+            canvas.clipPath(mPath, Region.Op.DIFFERENCE);
             canvas.drawRect(left, top, right, bottom, mBackgroundPaint);
             canvas.restore();
         }

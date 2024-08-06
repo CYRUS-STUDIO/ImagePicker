@@ -3,6 +3,8 @@
 
 # ImagePicker
 
+[![Release](https://jitpack.io/v/TranscodeGroup/ImagePicker.svg)](https://jitpack.io/#TranscodeGroup/ImagePicker)
+
 > 项目地址：https://github.com/linchaolong/ImagePicker
 
 ImagePicker 是 Android 下的图片选择与裁剪开源库，基于 [Android-Image-Cropper](https://github.com/ArthurHub/Android-Image-Cropper) 并做了如下改进：
